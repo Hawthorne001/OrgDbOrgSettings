@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Organization Settings Editor</title>
-    <script type="text/javascript" src="jquery1_11_0.js"></script>
-    <script type="text/javascript" src="json2.js"></script>
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery-migrate-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://orgdborgsettings.azure-mobile.net/client/MobileServices.Web-1.0.3.min.js"></script>
     <script type="text/javascript" src="../../ClientGlobalContext.js.aspx"></script>
     <script type="text/javascript">
@@ -152,7 +152,7 @@
                     datatype: "json",
                     //method: "MERGE", //not working on some IE/JQUERY versions 
                     url: rootUrl + this.getVersionSpecificWebApiUrl() + "/organizations" + "(" + organizationId + ")",
-                    data: oJSON.stringify({ orgdborgsettings: orgDbOrgSettingXml }),
+                    data: JSON.stringify({ orgdborgsettings: orgDbOrgSettingXml }),
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Accept", "application/json");
                         //XMLHttpRequest.setRequestHeader("X-HTTP-Method", "MERGE");
@@ -194,7 +194,7 @@
                     contentType: "application/json; charset=utf-8",
                     datatype: "json",
                     url: rootUrl + this.getVersionSpecificWebApiUrl() + "/organizations" + "(" + organizationId + ")",
-                    data: oJSON.stringify(update),
+                    data: JSON.stringify(update),
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Accept", "application/json");
                         //XMLHttpRequest.setRequestHeader("X-HTTP-Method", "MERGE");
@@ -224,7 +224,7 @@
                     contentType: "application/json; charset=utf-8",
                     datatype: "json",
                     url: rootUrl + this.getVersionSpecificWebApiUrl() + "/organizations" + "(" + organizationId + ")",
-                    data: oJSON.stringify(update),
+                    data: JSON.stringify(update),
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Accept", "application/json");
                         //XMLHttpRequest.setRequestHeader("X-HTTP-Method", "MERGE");
