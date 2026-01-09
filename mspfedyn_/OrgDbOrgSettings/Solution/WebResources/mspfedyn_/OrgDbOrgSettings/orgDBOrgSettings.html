@@ -544,7 +544,16 @@
             this.value = value
             this.type = type;
             this.minNumber = parseFloat(min).toString() === "NaN" ? null : parseFloat(min);
-            this.maxNumber = parseFloat(max).toString() === "NaN" ? null : parseFloat(max);
+            
+            // Handle empty or null max values for Number/Double types
+            var parsedMax = parseFloat(max);
+            if (isNaN(parsedMax) || max === "" || max === null || max === undefined) {
+                // For Number/Double types, use Int32.MaxValue as default max
+                this.maxNumber = (type && (type.toString().toLowerCase() === "number" || type.toString().toLowerCase() === "double")) ? 2147483647 : null;
+            } else {
+                this.maxNumber = parsedMax;
+            }
+            
             this.defaultValue = defaultValue;
             this.supportUrl = supportUrl || "#";
             this.description = description;
@@ -726,6 +735,24 @@
             }
             return retval;
         };
+        function getErrorMessage(e) {
+            ///<summary>Safely extracts an error message from any error type</summary>
+            ///<param name='e' type='Object'>Error object of any type</param>
+            ///<returns type='String'>Error message string</returns>
+            if (e instanceof Error) return e.message || e.name || e.toString();
+            if (typeof e === 'string') return e;
+            if (e && typeof e === 'object') {
+                if (e.message) return e.message;
+                if (e.statusText) return e.statusText;
+                if (e.responseText) return e.responseText;
+                try {
+                    return JSON.stringify(e);
+                } catch (jsonError) {
+                    return Object.prototype.toString.call(e);
+                }
+            }
+            return e != null ? String(e) : 'Unknown error';
+        };
         function resetYammerAttributes() {
             try { //double confirmation for this setting, just in case. 
                 var result = confirm("Proceed with removing your Yammer configuration from CRM? This should only be done when advised to do so or when required to fall back to using Activity Feeds.");
@@ -746,7 +773,7 @@
                 }
             }
             catch (e) {
-                alert("Error editing setting in CRM - " + e.message);
+                alert("Error editing setting in CRM - " + getErrorMessage(e));
                 printSettingsToDiv();
                 enableProgressDiv(false);
             }
@@ -814,7 +841,7 @@
                 }
             }
             catch (e) {
-                alert("Error editing setting in CRM - " + e.message);
+                alert("Error editing setting in CRM - " + getErrorMessage(e));
                 printSettingsToDiv();
                 enableProgressDiv(false); 
             }
