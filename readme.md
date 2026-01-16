@@ -13,7 +13,7 @@ The link to the releases is somewhat hidden in plain sight - to help with this, 
 - Once you download the zip file upload this solution into your Dataverse environment by navigating to Settings | Solutions then click the Import button in the command bar. You can also install via the maker portal make.powerapps.com, go to *Solutions*, then import this solution. 
 - Once completed you now can use the editor to alter any settings that need to be changed or viewed
 
-### Where to I find it after installing?
+### How do I find the editor after installing the solution?
 The OrgDBSettings utility is installed as a managed Dataverse solution. This utility utilizes the Solution Configuration Page to provide access to the editor.  To find the editor: 
 - log into the **Maker Portal** for your environment and geography (US customers would utilize make.powerapps.com)
 - navigate to **Solutions**, then **click** to open the **Organization Settings Editor** managed solution
@@ -42,3 +42,4 @@ The importing of this managed solution will include the following components:
 
 ### What about On-Prem CRM?
 OnPrem Editions are supported for editting organization database settings otherwise known as OrgDBOrgSettings as well as some selected Organization attributes, please understand that onprem may or may not have the same settings - _mileage may vary_ for onprem and you'll want to be sure your version of onprem contains the setting you want to change. 
+
